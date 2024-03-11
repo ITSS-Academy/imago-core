@@ -20,8 +20,9 @@ export class RepositoryService implements StorageRepository {
     const publicUrls: string[] = [];
 
     await Promise.all(
-      files.map(async(file)=>{
+      files.map(async (file) => {
         const fileName = `images/${storage.fileName}/${file.originalname}`;
+        console.log(fileName);
         const fileUpload = bucket.file(fileName);
 
         const blobStream = fileUpload.createWriteStream({
@@ -31,11 +32,11 @@ export class RepositoryService implements StorageRepository {
         });
 
         await new Promise((resolve, reject) => {
-          blobStream.on('error', async(error)=>{
+          blobStream.on('error', async (error) => {
             reject(error)
           })
 
-          blobStream.on('finish', async()=>{
+          blobStream.on('finish', async () => {
             const [imageUrl] = await fileUpload.getSignedUrl({
               action: 'read',
               expires: '01-01-2500',
@@ -45,12 +46,19 @@ export class RepositoryService implements StorageRepository {
             resolve(imageUrl);
           })
           blobStream.end(file.buffer);
-
         });
       })
     );
     return publicUrls;
 
   }
+  //delete folder from firebase storage
+  async deleteFolder(fileName: any): Promise<boolean> {
+    const bucket = this.storage.bucket('gs://itss-imago-0000.appspot.com');
+    const folder = bucket.file(`images/${fileName}`);
+    await folder.delete();
+    return true;
+  }
+
 
 }

@@ -10,6 +10,8 @@ import { CommentModule } from './internal/comment/comment.module';
 import { ReportModule } from './internal/report/report.module';
 import { HashtagModule } from './internal/hashtag/hashtag.module';
 import { StorageModule } from './internal/storage/storage.module';
+import { SearchModule } from './internal/search/search.module';
+import { NotificationModule } from './internal/notification/notification.module';
 import { AppController } from './app.controller';
 import { CategoryController } from './internal/category/delivery/category.controller';
 import { ProfileController } from './internal/profile/delivery/profile.controller';
@@ -30,6 +32,8 @@ import { StorageController } from './internal/storage/storage.controller';
     RoleModule,
     HashtagModule,
     StorageModule,
+    SearchModule,
+    NotificationModule,
   ],
   controllers: [
     AppController,

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   FileTypeValidator, Get, Headers,
   Inject,
   MaxFileSizeValidator,
@@ -12,6 +13,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { storage } from 'firebase-admin';
 import { url } from 'inspector';
 import { StorageDomain, StorageInterop } from 'src/domain/storage.domain';
 
@@ -29,11 +31,22 @@ export class StorageController {
           new FileTypeValidator({ fileType: '.(jpg|jpeg|png)' })
         ]
       })
-    ) files: Express.Multer.File[], @Headers() headers:any
+    ) files: Express.Multer.File[], @Headers() headers: any
   ) {
     try {
       let token = headers['authorization'];
-      return this.storageInterop.uploadFile(files, storage, token );
+      return this.storageInterop.uploadFile(files, storage, token);
+    } catch (error) {
+      throw error;
+    }
+  }
+  //delete folder from firebase storage
+  @Delete()
+  async deleteFolder(@Body() fileName: string, @Headers() headers: any) {
+    try {
+      let token = headers['authorization'];
+      console.log(fileName);
+      return this.storageInterop.deleteFolder(fileName, token);
     } catch (error) {
       throw error;
     }
