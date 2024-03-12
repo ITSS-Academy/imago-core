@@ -15,12 +15,10 @@ export class InteropService implements StorageInterop {
     }
   }
   //delete file from firebase storage
-
-  async deleteFolder(fileName: string, token: string): Promise<boolean> {
-    try {
-      return await this.storageUsecase.deleteFolder(fileName);
-    } catch (e) {
-      throw e;
+  async deleteFolder(fileName: string, token: string): Promise<string> {
+    if (!fileName) {
+      throw ErrorFileRequired;
     }
+    return await this.storageUsecase.deleteFolder(fileName);
   }
 }

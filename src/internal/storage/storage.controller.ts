@@ -1,3 +1,4 @@
+import DeleteByQueryApi from '@elastic/elasticsearch/lib/api/api/delete_by_query';
 import {
   Body,
   Controller,
@@ -41,11 +42,10 @@ export class StorageController {
     }
   }
   //delete folder from firebase storage
-  @Delete()
-  async deleteFolder(@Body() fileName: string, @Headers() headers: any) {
+  @Delete('delete')
+  async deleteFolder(@Query('fileName') fileName: string, @Headers() headers: any) {
     try {
       let token = headers['authorization'];
-      console.log(fileName);
       return this.storageInterop.deleteFolder(fileName, token);
     } catch (error) {
       throw error;

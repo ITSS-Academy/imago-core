@@ -7,17 +7,17 @@ export interface StorageDomain {
 
 export interface StorageRepository {
   uploadFile(files: Express.Multer.File[], storage: StorageDomain): Promise<string[]>;
-  deleteFolder(fileName: string): Promise<boolean>;
+  deleteFolder(file: string): Promise<string>;
 }
 
 export interface StorageUseCase {
   uploadFile(files: Express.Multer.File[], storage: StorageDomain): Promise<string[]>;
-  deleteFolder(fileName: string): Promise<boolean>;
+  deleteFolder(fileName: string): Promise<string>;
 }
 
 export interface StorageInterop {
   uploadFile(files: Express.Multer.File[], storage: StorageDomain, token: string): Promise<string[]>;
-  deleteFolder(fileName: string, token: string): Promise<boolean>;
+  deleteFolder(fileName: string, token: string): Promise<string>;
 }
 
 //Error Quantity can not be more than 5

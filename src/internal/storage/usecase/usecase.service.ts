@@ -13,9 +13,9 @@ export class UsecaseService implements StorageUseCase {
     return await this.storageRepo.uploadFile(files, storage);
   }
   //delete file from firebase storage
-  async deleteFolder(fileName: string): Promise<boolean> {
-    if (fileName === undefined) {
-      throw ErrorFileUndefined;
+  async deleteFolder(fileName: string): Promise<string> {
+    if (!fileName) {
+      throw ErrorFileRequired;
     }
     return await this.storageRepo.deleteFolder(fileName);
   }
