@@ -25,7 +25,7 @@ import { Profile } from 'src/domain/profile.domain';
 export class BaseUseCaseService implements PostUseCase {
   constructor(
     @Inject('PostRepository') private postRepository: PostRepository,
-  ) {}
+  ) { }
   getProfilePost(page: number, size: number): Promise<any> {
     return this.postRepository.getProfilePost(page, size);
   }

@@ -13,7 +13,7 @@ import { Auth } from '../../../domain/auth.domain';
 export class UsecaseService implements ProfileUseCase {
   constructor(
     @Inject('ProfileRepository') private profileRepository: ProfileRepository,
-  ) {}
+  ) { }
 
   async create(profile: Profile): Promise<boolean> {
     try {
@@ -52,6 +52,8 @@ export class UsecaseService implements ProfileUseCase {
   }
 
   async get(id: string): Promise<Profile> {
+
+    // console.log('id', id);
     try {
       if (!id) {
         throw ErrorIdEmpty;

@@ -15,7 +15,7 @@ export class BaseInteropService implements PostInterop {
     @Inject('PostUseCase') private useCase: PostUseCase,
     @Inject('AuthUseCase') private authUsecase: AuthUseCase,
     @Inject('SearchUseCase') private searchUsecase: SearchUseCase<PostDomain>,
-  ) {}
+  ) { }
   async getProfilePost(
     token: string,
     page: number,

@@ -11,9 +11,11 @@ import { SearchModule } from '../search/search.module';
     { provide: 'PostRepository', useClass: BaseRepositoryService },
     { provide: 'PostUseCase', useClass: BaseUseCaseService },
     { provide: 'PostInterop', useClass: BaseInteropService },
+    { provide: 'ProfileUseCase', useClass: BaseUseCaseService },
+
   ],
   controllers: [HttpController],
-  imports: [AuthModule, SearchModule],
-  exports: ['PostRepository', 'PostUseCase', 'PostInterop'],
+  imports: [AuthModule, SearchModule,],
+  exports: ['PostRepository', 'PostUseCase', 'PostInterop', 'ProfileUseCase'],
 })
-export class PostModule {}
+export class PostModule { }

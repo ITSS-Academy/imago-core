@@ -17,7 +17,7 @@ import {
 
 @Controller('v1/post')
 export class HttpController {
-  constructor(@Inject('PostInterop') private interop: PostInterop) {}
+  constructor(@Inject('PostInterop') private interop: PostInterop) { }
 
   @Get('creatorpost')
   async getProfilePost(
