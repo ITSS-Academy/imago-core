@@ -78,7 +78,7 @@ export class CommentUseCaseBaseService implements CommentUseCase {
       throw PageError;
     }
     const comments = await this.repository.getCommentsByPostId(postId, page);
-    const size = 10;
+    const size = 50;
     if (comments.data.length === 0) {
       return {
         data: [],
