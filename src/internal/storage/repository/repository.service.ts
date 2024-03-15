@@ -24,6 +24,7 @@ export class RepositoryService implements StorageRepository {
     await Promise.all(
       files.map(async (file) => {
         const fileName = `images/${storage.fileName}/${file.originalname}`;
+        console.log(fileName);
         const fileUpload = bucket.file(fileName);
 
         const blobStream = fileUpload.createWriteStream({
@@ -50,5 +51,15 @@ export class RepositoryService implements StorageRepository {
       }),
     );
     return publicUrls;
+  }
+  //delete folder from firebase storage
+  async deleteFolder(fileName: string): Promise<string> {
+    if (!fileName) {
+      throw new Error('File is required');
+    }
+    const bucket = this.storage.bucket('gs://imago-backup.appspot.com');
+    const folder = bucket.file(`images/gz4LtOWvyLekOfpIvapdBVjuXKC3/test/${fileName}`);
+    await folder.delete();
+    return 'Folder deleted';
   }
 }

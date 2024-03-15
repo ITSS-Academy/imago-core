@@ -14,6 +14,14 @@ import { AppController } from './app.controller';
 import { SearchModule } from './internal/search/search.module';
 import { NotificationModule } from './internal/notification/notification.module';
 
+import { CategoryController } from './internal/category/delivery/category.controller';
+import { ProfileController } from './internal/profile/delivery/profile.controller';
+import { ReportController } from './internal/report/report.controller';
+import { CommentController } from './internal/comment/delivery/comment.controller';
+import { AuthController } from './internal/auth/delivery/auth.controller';
+import { HttpController } from './internal/post/delivery/http.controller';
+import { StorageController } from './internal/storage/storage.controller';
+
 @Module({
   imports: [
     AuthModule,
@@ -31,4 +39,4 @@ import { NotificationModule } from './internal/notification/notification.module'
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

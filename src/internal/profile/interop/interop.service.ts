@@ -14,7 +14,7 @@ export class InteropService implements ProfileInterop {
     @Inject('ProfileUseCase') private profileUseCase: ProfileUseCase,
     @Inject('AuthUseCase') private authUseCase: AuthUseCase,
     @Inject('SearchUseCase') private searchUseCase: SearchUseCase<Profile>,
-  ) {}
+  ) { }
 
   search(index: string, query: string): Promise<SearchResult<Profile>> {
     return this.searchUseCase.search(index, query);

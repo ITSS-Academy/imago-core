@@ -19,7 +19,7 @@ import { ErrorMinusSize } from '../../../domain/role.domain';
 export class UsecaseService implements ProfileUseCase {
   constructor(
     @Inject('ProfileRepository') private profileRepository: ProfileRepository,
-  ) {}
+  ) { }
 
   async create(profile: Profile): Promise<boolean> {
     try {

@@ -12,9 +12,11 @@ import { ProfileModule } from '../profile/profile.module';
     { provide: 'PostRepository', useClass: BaseRepositoryService },
     { provide: 'PostUseCase', useClass: BaseUseCaseService },
     { provide: 'PostInterop', useClass: BaseInteropService },
+    { provide: 'ProfileUseCase', useClass: BaseUseCaseService },
+
   ],
   controllers: [HttpController],
   imports: [AuthModule, SearchModule, ProfileModule],
   exports: ['PostRepository', 'PostUseCase', 'PostInterop'],
 })
-export class PostModule {}
+export class PostModule { }

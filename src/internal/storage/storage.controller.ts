@@ -1,6 +1,8 @@
+import DeleteByQueryApi from '@elastic/elasticsearch/lib/api/api/delete_by_query';
 import {
   Body,
   Controller,
+  Delete,
   FileTypeValidator, Get, Headers,
   Inject,
   MaxFileSizeValidator,
@@ -12,6 +14,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { storage } from 'firebase-admin';
 import { url } from 'inspector';
 import { max } from 'rxjs';
 import { StorageDomain, StorageInterop } from 'src/domain/storage.domain';
@@ -30,13 +33,13 @@ export class StorageController {
           new FileTypeValidator({ fileType: '.(jpg|jpeg|png)' })
         ]
       })
-    ) files: Express.Multer.File[], @Headers() headers:any
+    ) files: Express.Multer.File[], @Headers() headers: any
   ) {
-    
+
     try {
-    
+
       let token = headers['authorization'];
-      return this.storageInterop.uploadFile(files, storage, token );
+      return this.storageInterop.uploadFile(files, storage, token);
     } catch (e) {
       throw new Error("Error uploading file to storage");
     }

@@ -7,7 +7,7 @@ import {
 } from '../../../../domain/comment.domain';
 
 @Injectable()
-export class CommentRepositoryBaseService implements CommentRepository{
+export class CommentRepositoryBaseService implements CommentRepository {
   private db: admin.firestore.Firestore;
 
   constructor() {
@@ -49,7 +49,7 @@ export class CommentRepositoryBaseService implements CommentRepository{
       throw e;
     }
   }
-  async updateComment(id: string,comment: Partial<Comment>): Promise<boolean> {
+  async updateComment(id: string, comment: Partial<Comment>): Promise<boolean> {
     try {
       const Comment = await this.db.collection('comments').doc(id).update(comment);
       return true;

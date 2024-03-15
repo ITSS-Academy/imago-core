@@ -17,7 +17,7 @@ export class BaseInteropService implements PostInterop {
     @Inject('AuthUseCase') private authUsecase: AuthUseCase,
     @Inject('SearchUseCase') private searchUsecase: SearchUseCase<PostDomain>,
     @Inject('ProfileUseCase') private profileUseCase: ProfileUseCase,
-  ) {}
+  ) { }
 
   async updateByAdmin(
     post: PostDomain,

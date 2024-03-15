@@ -25,7 +25,7 @@ import { Profile } from 'src/domain/profile.domain';
 export class BaseUseCaseService implements PostUseCase {
   constructor(
     @Inject('PostRepository') private postRepository: PostRepository,
-  ) {}
+  ) { }
 
   async updateByAdmin(post: PostDomain, id: string): Promise<any> {
     return await this.postRepository.updateByAdmin(post, id);
