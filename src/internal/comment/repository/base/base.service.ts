@@ -23,17 +23,19 @@ export class CommentRepositoryBaseService implements CommentRepository {
       const comments = snapshot.docs.map((doc) => doc.data() as Comment);
       const size = 10;
 
+      // don't have data return []
       if (comments.length === 0) {
         return {
           data: [],
-          endpage: 1
-        }
+          endpage: 0,
+        };
       }
-
-      return {
-        data: comments.slice((page - 1) * size, page * size),
-        endpage: Math.ceil(comments.length / size),
-      };
+      else {
+        return {
+          data: comments.slice((page - 1) * size, page * size),
+          endpage: Math.ceil(comments.length / size),
+        };
+      }
     } catch (e) {
       throw e;
     }
