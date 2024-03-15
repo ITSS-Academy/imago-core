@@ -16,6 +16,7 @@ import {
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { storage } from 'firebase-admin';
 import { url } from 'inspector';
+import { max } from 'rxjs';
 import { StorageDomain, StorageInterop } from 'src/domain/storage.domain';
 
 @Controller('v1/storage')
@@ -34,21 +35,13 @@ export class StorageController {
       })
     ) files: Express.Multer.File[], @Headers() headers: any
   ) {
+
     try {
+
       let token = headers['authorization'];
       return this.storageInterop.uploadFile(files, storage, token);
-    } catch (error) {
-      throw error;
-    }
-  }
-  //delete folder from firebase storage
-  @Delete('delete')
-  async deleteFolder(@Query('fileName') fileName: string, @Headers() headers: any) {
-    try {
-      let token = headers['authorization'];
-      return this.storageInterop.deleteFolder(fileName, token);
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw new Error("Error uploading file to storage");
     }
   }
 }

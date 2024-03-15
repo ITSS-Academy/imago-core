@@ -14,7 +14,7 @@ import { Profile, ProfileInterop } from 'src/domain/profile.domain';
 export class ProfileController {
   constructor(
     @Inject('ProfileInterop') private profileInterop: ProfileInterop,
-  ) {}
+  ) { }
 
   @Get('')
   get(@Headers() headers: any, @Query('id') id: string) {

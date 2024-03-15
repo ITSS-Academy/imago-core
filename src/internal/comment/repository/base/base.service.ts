@@ -7,7 +7,7 @@ import {
 } from '../../../../domain/comment.domain';
 
 @Injectable()
-export class CommentRepositoryBaseService implements CommentRepository{
+export class CommentRepositoryBaseService implements CommentRepository {
   private db: admin.firestore.Firestore;
 
   constructor() {
@@ -21,7 +21,15 @@ export class CommentRepositoryBaseService implements CommentRepository{
       const commentRef = this.db.collection('comments');
       const snapshot = await commentRef.where('postId', '==', postId).get();
       const comments = snapshot.docs.map((doc) => doc.data() as Comment);
-      const size = 2;
+      const size = 10;
+
+      if (comments.length === 0) {
+        return {
+          data: [],
+          endpage: 1
+        }
+      }
+
       return {
         data: comments.slice((page - 1) * size, page * size),
         endpage: Math.ceil(comments.length / size),
@@ -39,7 +47,7 @@ export class CommentRepositoryBaseService implements CommentRepository{
       throw e;
     }
   }
-  async updateComment(id: string,comment: Partial<Comment>): Promise<boolean> {
+  async updateComment(id: string, comment: Partial<Comment>): Promise<boolean> {
     try {
       const Comment = await this.db.collection('comments').doc(id).update(comment);
       return true;

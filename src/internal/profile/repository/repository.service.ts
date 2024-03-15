@@ -17,11 +17,17 @@ export class RepositoryService implements ProfileRepository {
   }
 
   async get(id: string): Promise<Profile> {
-    const profile = await this.db.collection('profiles').doc(id).get();
-    if (!profile.exists) {
-      throw ErrorProfileNotFound;
-    }
-    return profile.data() as Profile;
+    return await this.db
+      .collection('profiles')
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          return doc.data() as Profile;
+        } else {
+          throw ErrorProfileNotFound;
+        }
+      });
   }
 
   async getAll(): Promise<Profile[]> {
@@ -62,7 +68,7 @@ export class RepositoryService implements ProfileRepository {
       if (profileData) {
         result.push({
           ...data,
-          ...profileData.data(),
+          profile: profileData.data(),
           numberPost: count,
         });
       }
